@@ -169,6 +169,8 @@ function addData() {
 addData();
 
 
+
+
 allreels.addEventListener('click', function (dets) {
     if (dets.target.className == 'like') {
         if (!reels[dets.target.id].isLiked) {
@@ -198,14 +200,3 @@ allreels.addEventListener('click', function (dets) {
         addData();
     }
 });
-
-
-
-allreels.addEventListener('scrollsnapchange',function(dets){
-        console.log(dets.snapTargetBlock)
-        var video = dets.snapTargetBlock.querySelector('video')
-        if(dets.snapTargetBlock){
-            video.play()
-            video.muted = false
-        }
-})
