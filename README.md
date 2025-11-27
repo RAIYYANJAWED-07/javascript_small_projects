@@ -7,3 +7,7 @@ piano link - https://simple-piano-jsdom.netlify.app
 quote randomizer link - https://quote-randomizer.netlify.app
 
 downloder Button link - https://downloder-button.netlify.app
+
+spotlight link - https://spotligth-effect.netlify.app
+
+reels page link - https://shorts-reels-implementation.netlify.app
