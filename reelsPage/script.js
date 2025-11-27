@@ -198,3 +198,14 @@ allreels.addEventListener('click', function (dets) {
         addData();
     }
 });
+
+
+
+allreels.addEventListener('scrollsnapchange',function(dets){
+        console.log(dets.snapTargetBlock)
+        var video = dets.snapTargetBlock.querySelector('video')
+        if(dets.snapTargetBlock){
+            video.play()
+            video.muted = false
+        }
+})
