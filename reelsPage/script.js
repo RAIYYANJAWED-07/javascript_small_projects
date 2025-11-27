@@ -1,5 +1,6 @@
 const reels = [
     {
+        ismuted: true,
         username: "rayzen.op",
         likeCount: 2530,
         isLiked: false,
@@ -11,6 +12,7 @@ const reels = [
         isFollowed: true
     },
     {
+        ismuted: true,
         username: "techwithaycer",
         likeCount: 870,
         isLiked: true,
@@ -22,6 +24,7 @@ const reels = [
         isFollowed: false
     },
     {
+        ismuted: true,
         username: "mystic_maharajas",
         likeCount: 5120,
         isLiked: false,
@@ -33,6 +36,7 @@ const reels = [
         isFollowed: true
     },
     {
+        ismuted: true,
         username: "travelwithriya",
         likeCount: 1490,
         isLiked: false,
@@ -44,6 +48,7 @@ const reels = [
         isFollowed: false
     },
     {
+        ismuted: true,
         username: "coding_simplified",
         likeCount: 2100,
         isLiked: false,
@@ -55,6 +60,7 @@ const reels = [
         isFollowed: true
     },
     {
+        ismuted: true,
         username: "fitness_by_aarav",
         likeCount: 740,
         isLiked: true,
@@ -66,6 +72,7 @@ const reels = [
         isFollowed: false
     },
     {
+        ismuted: true,
         username: "daily_quotes",
         likeCount: 4200,
         isLiked: true,
@@ -77,6 +84,7 @@ const reels = [
         isFollowed: false
     },
     {
+        ismuted: true,
         username: "foodie_nihal",
         likeCount: 3100,
         isLiked: false,
@@ -88,6 +96,7 @@ const reels = [
         isFollowed: true
     },
     {
+        ismuted: true,
         username: "uxbyhina",
         likeCount: 980,
         isLiked: true,
@@ -99,6 +108,7 @@ const reels = [
         isFollowed: false
     },
     {
+        ismuted: true,
         username: "crypto_vision",
         likeCount: 5600,
         isLiked: true,
@@ -111,23 +121,30 @@ const reels = [
     }
 ];
 
-let sum = ''
+var allreels = document.querySelector('.all-reels')
+var reel = document.querySelectorAll('.reel')
 
-reels.forEach(function (elem) {
-    sum = sum + ` <div class="reel">
-                    <video autoplay loop muted src="${elem.video}"></video>
+function addData() {
+    let sum = ''
+
+    reels.forEach(function (elem, indx) {
+        sum = sum + `<div id="${indx}" class="reel">
+                    <video autoplay loop ${elem.ismuted ? 'muted' : ''} src="${elem.video}"></video>
+                    <div id="${indx}" class="mute">
+                         ${elem.ismuted?'<i class="ri-volume-mute-fill"></i>' : '<i class="ri-volume-up-line"></i>'}
+                    </div>
                     <div class="bottom">
                         <div class="user">
                             <img src="${elem.userprofile}"
                                 alt="">
                             <h4>${elem.username}</h4>
-                            <button>${elem.isFollowed?'Unfollow' : 'follow'}</button>
+                            <button id="${indx}" class="follow">${elem.isFollowed ? 'Unfollow' : 'follow'}</button>
                         </div>
                         <h3>${elem.caption}</h3>
                     </div>
                     <div class="right">
-                        <div class="like">
-                            <h4 class="like-icon icon">${elem.isLiked?'<i class="love ri-heart-3-fill"></i>' : '<i class="ri-heart-3-line"></i>'}</h4>
+                        <div id="${indx}" class="like">
+                            <h4 class="like-icon icon">${elem.isLiked ? '<i class="love ri-heart-3-fill"></i>' : '<i class="ri-heart-3-line"></i>'}</h4>
                             <h6>${elem.likeCount}</h6>
                         </div>
                         <div class="comment">
@@ -143,8 +160,41 @@ reels.forEach(function (elem) {
                         </div>
                     </div>
                 </div>`
-})
+    })
 
 
-var allreels = document.querySelector('.all-reels')
-allreels.innerHTML = sum
+    allreels.innerHTML = sum
+}
+
+addData();
+
+
+allreels.addEventListener('click', function (dets) {
+    if (dets.target.className == 'like') {
+        if (!reels[dets.target.id].isLiked) {
+            reels[dets.target.id].likeCount++;
+            reels[dets.target.id].isLiked = true;
+        } else {
+            reels[dets.target.id].likeCount--;
+            reels[dets.target.id].isLiked = false;
+        }
+        addData();
+    }
+    
+    if (dets.target.className == 'follow') {
+        if (!reels[dets.target.id].isFollowed) {
+            reels[dets.target.id].isFollowed = true;
+        } else {
+            reels[dets.target.id].isFollowed = false;
+        }
+        addData();
+    }
+    if (dets.target.className == 'mute') {
+        if (!reels[dets.target.id].ismuted) {
+            reels[dets.target.id].ismuted = true;
+        } else {
+            reels[dets.target.id].ismuted = false;
+        }
+        addData();
+    }
+});
